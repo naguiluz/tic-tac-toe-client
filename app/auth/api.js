@@ -1,4 +1,4 @@
-// const store = require('./../store')
+const store = require('./../store')
 
 const signUp = function (data) { // signUp is using ajax to communicate with the API and access the 'object' we created with our getFormFields
   return $.ajax({
@@ -16,7 +16,17 @@ const signIn = function (data) {
   })
 }
 
+const signOut = function () {
+  return $.ajax({
+    url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-out',
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    }
+  })
+}
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  signOut
 }

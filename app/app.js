@@ -9,4 +9,5 @@ const authEvents = require('./auth/events')
 $(() => {
   $('#sign-up').on('submit', authEvents.onSignUp) // on submit of sign up we activate onSignUp in events.js
   $('#sign-in').on('submit', authEvents.onSignIn)
+  $('#sign-out').on('click', authEvents.onSignOut)
 })

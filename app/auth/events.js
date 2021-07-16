@@ -20,7 +20,14 @@ const onSignIn = function (event) {
     .catch(ui.onFailure)
 }
 
+const onSignOut = function () { // our sign out event does not take in any data so it does not need to use getFormFields, instead it will only access the api through ajax and our signOut function
+  api.signOut()
+    .then(ui.onSignOutSuccess)
+    .catch(ui.onFailure)
+}
+
 module.exports = {
   onSignUp,
-  onSignIn
+  onSignIn,
+  onSignOut
 }
