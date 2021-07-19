@@ -32,9 +32,10 @@ const onNewGame = function () {
     .catch(ui.onFailure)
 }
 
-const onPlayerOne = function () {
+const onPlayerOne = function (event) {
   console.log('click')
-  api.playerOne()
+  const click = event.target
+  api.playerOne(click)
     .then(ui.onPlayerOneSuccess)
     .catch(ui.onFailure)
 }

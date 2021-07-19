@@ -3,7 +3,7 @@ const config = require('./../config')
 
 const signUp = function (data) { // signUp is using ajax to communicate with the API and access the 'object' we created with our getFormFields
   return $.ajax({
-    url: config + '/sign-up',
+    url: config.apiUrl + '/sign-up',
     method: 'POST',
     data: data
   })
@@ -11,7 +11,7 @@ const signUp = function (data) { // signUp is using ajax to communicate with the
 
 const signIn = function (data) {
   return $.ajax({
-    url: config + '/sign-in',
+    url: config.apiUrl + '/sign-in',
     method: 'POST',
     data: data
   })
@@ -19,7 +19,7 @@ const signIn = function (data) {
 
 const signOut = function () {
   return $.ajax({
-    url: config + '/sign-out',
+    url: config.apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
       Authorization: 'Bearer ' + store.user.token
@@ -29,7 +29,7 @@ const signOut = function () {
 
 const newGame = function () {
   return $.ajax({
-    url: config + '/games',
+    url: config.apiUrl + '/games',
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + store.user.token
@@ -37,10 +37,9 @@ const newGame = function () {
   })
 }
 
-const playerOne = function (response) {
-  console.log(response)
+const playerOne = function (click) {
   return $.ajax({
-    url: config + '/games/' + store.gameId,
+    url: config.apiUrl + '/games/' + store.gameId,
     method: 'PATCH',
     headers: {
       Authorization: 'Bearer ' + store.user.token
@@ -48,7 +47,7 @@ const playerOne = function (response) {
     data: {
       game: {
         cell: {
-          index: 0,
+          index: click,
           value: 'X'
         },
         over: false
