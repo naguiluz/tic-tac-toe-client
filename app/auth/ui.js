@@ -43,6 +43,10 @@ const onNewGameSuccess = function (response) {
   $('#game-board').css('display', 'block')
 }
 
+const onPlayerOneSuccess = function (response) {
+  console.log(response)
+}
+
 const onFailure = function () { // this gives our user a fail message
   $('#message').text('Whoops! There was an error!')
   $('#sign-up').trigger('reset')
@@ -53,5 +57,6 @@ module.exports = {
   onSignInSuccess,
   onSignOutSuccess,
   onNewGameSuccess,
+  onPlayerOneSuccess,
   onFailure
 }

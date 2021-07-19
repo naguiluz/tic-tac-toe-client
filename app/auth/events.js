@@ -35,8 +35,8 @@ const onNewGame = function () {
 const onPlayerOne = function () {
   console.log('click')
   api.playerOne()
-  // .then(ui.onPlayerOneSuccess)
-  // .catch(ui.onFailure)
+    .then(ui.onPlayerOneSuccess)
+    .catch(ui.onFailure)
 }
 
 module.exports = {
