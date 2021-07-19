@@ -35,9 +35,30 @@ const newGame = function () {
     }
   })
 }
+
+const playerOne = function (response) {
+  console.log(response)
+  return $.ajax({
+    url: 'https://tic-tac-toe-api-development.herokuapp.com/games/' + store.gameId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: {
+      game: {
+        cell: {
+          index: 0,
+          value: 'X'
+        },
+        over: false
+      }
+    }
+  })
+}
 module.exports = {
   signUp,
   signIn,
   signOut,
-  newGame
+  newGame,
+  playerOne
 }

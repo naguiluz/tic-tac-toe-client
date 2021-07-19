@@ -7,7 +7,7 @@ const onSignUpSuccess = function (response) { // this gives our user a success m
 }
 
 const onSignInSuccess = function (response) {
-  store.user = response.user
+  store.user = response.user // this stores the data created for user in our store file
   $('#message').text(`Welcome back, ${response.user.email}!`)
   $('#sign-up').trigger('reset')
   $('#sign-in').trigger('reset')
@@ -36,12 +36,14 @@ const onSignOutSuccess = function () {
   $('#game-board').css('display', 'none')
 }
 
-const onNewGameSuccess = function () {
+const onNewGameSuccess = function (response) {
+  console.log(response)
+  store.gameId = response.game._id // this stores data for game in store
   $('#message').text("Let's Play!")
   $('#game-board').css('display', 'block')
 }
 
-const onFailure = function () { // this give our user a fail message
+const onFailure = function () { // this gives our user a fail message
   $('#message').text('Whoops! There was an error!')
   $('#sign-up').trigger('reset')
 }
