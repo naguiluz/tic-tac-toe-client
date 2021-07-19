@@ -1,1 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
+
+td {
+  height: 250px;
+  width: 250px;
+}
+
+.vertical {
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+}
+
+.horizontal {
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+}
