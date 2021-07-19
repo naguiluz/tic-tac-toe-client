@@ -1,6 +1,7 @@
 const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+let turn = true // this will allow us to access what turn it is. if turn is true then x if false then o
 
 const onSignUp = function (event) {
   event.preventDefault() // prevent refresh
@@ -33,11 +34,23 @@ const onNewGame = function () {
 }
 
 const onPlayerOne = function (event) {
-  console.log('click')
-  const click = event.target
-  api.playerOne(click)
+  const player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
+  console.log(turn)
+  const target = event.target
+  const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
+  const game = { // this creates a variable that is a game "object" that we can pass in
+    cell: {
+      index: cellIndex, // sets index to clicked td
+      value: player // this sets the value to what player turn it is
+    },
+    over: false // NEED TO UPDATE THIS LATER
+  }
+  api.playerOne(game)
     .then(ui.onPlayerOneSuccess)
     .catch(ui.onFailure)
+  turn = !turn // this changes turn from true to false each return
+  return turn
+  // NEED TO STOP BOXES FROM OVERWRITING
 }
 
 module.exports = {

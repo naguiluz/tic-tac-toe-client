@@ -3,10 +3,6 @@ curl 'https://tic-tac-toe-api-development.herokuapp.com/games' \
   --request POST \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}"
-  --data '{
-    "game": {
-
-    }
-  }'
+  --data '{}'
 
 echo

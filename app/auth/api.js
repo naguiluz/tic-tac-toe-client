@@ -33,11 +33,12 @@ const newGame = function () {
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + store.user.token
-    }
+    },
+    data: {}
   })
 }
 
-const playerOne = function (click) {
+const playerOne = function (game) { // this function takes in the data from our game "object in events and passes it in below"
   return $.ajax({
     url: config.apiUrl + '/games/' + store.gameId,
     method: 'PATCH',
@@ -45,16 +46,11 @@ const playerOne = function (click) {
       Authorization: 'Bearer ' + store.user.token
     },
     data: {
-      game: {
-        cell: {
-          index: click,
-          value: 'X'
-        },
-        over: false
-      }
+      game
     }
   })
 }
+
 module.exports = {
   signUp,
   signIn,
