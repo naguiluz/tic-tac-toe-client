@@ -26,8 +26,15 @@ const onSignOut = function () { // our sign out event does not take in any data 
     .catch(ui.onFailure)
 }
 
+const onNewGame = function (event) {
+  api.newGame()
+    .then(ui.onNewGameSuccess)
+    .catch(ui.onFailure)
+}
+
 module.exports = {
   onSignUp,
   onSignIn,
-  onSignOut
+  onSignOut,
+  onNewGame
 }
