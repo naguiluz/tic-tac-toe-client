@@ -35,9 +35,9 @@ const onNewGame = function () {
 
 const onPlayerOne = function (event) {
   const player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
-  console.log(turn)
   const target = event.target
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
+  console.log(cellIndex)
   const game = { // this creates a variable that is a game "object" that we can pass in
     cell: {
       index: cellIndex, // sets index to clicked td
