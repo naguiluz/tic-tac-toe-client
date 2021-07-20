@@ -2,6 +2,7 @@ const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 let turn = true // this will allow us to access what turn it is. if turn is true then x if false then o
+let player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
 
 const onSignUp = function (event) {
   event.preventDefault() // prevent refresh
@@ -28,29 +29,36 @@ const onSignOut = function () { // our sign out event does not take in any data 
 }
 
 const onNewGame = function () {
+  player = 'x' // reset turn to x
+  turn = true // reset turn to true
+  $('td').text('') // resets the boxes for a new game
   api.newGame()
     .then(ui.onNewGameSuccess)
     .catch(ui.onFailure)
 }
 
 const onPlayerOne = function (event) {
-  const player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
   const target = event.target
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
-  console.log(cellIndex)
-  const game = { // this creates a variable that is a game "object" that we can pass in
-    cell: {
-      index: cellIndex, // sets index to clicked td
-      value: player // this sets the value to what player turn it is
-    },
-    over: false // NEED TO UPDATE THIS LATER
+  if ($(target).is(':empty')) { // setting an if statement to only run this process if a cell is empty
+    $(target).text(player)
+    const game = { // this creates a variable that is a game "object" that we can pass in
+      cell: {
+        index: cellIndex, // sets index to clicked td
+        value: player // this sets the value to what player turn it is
+      },
+      over: false // NEED TO UPDATE THIS LATER
+    }
+    api.playerOne(game)
+      .then(ui.onPlayerOneSuccess)
+      .catch(ui.onFailure)
+    turn = !turn // this changes turn from true to false each return
+    player = turn ? 'x' : 'o' // redefining player turn so that our message is properly displaying whose turn it is
+    $('#message').text(`It's ${player}'s turn!`)
+    return turn
+  } else { // message for when a cell is full
+    $('#message').text('This space is taken! Why don\'t you select an empty one?')
   }
-  api.playerOne(game)
-    .then(ui.onPlayerOneSuccess)
-    .catch(ui.onFailure)
-  turn = !turn // this changes turn from true to false each return
-  return turn
-  // NEED TO STOP BOXES FROM OVERWRITING
 }
 
 module.exports = {
