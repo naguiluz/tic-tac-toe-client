@@ -63,8 +63,6 @@ const onWin = function () {
     board[4] === board[8]
   const win8 =
     board[2] !== '' &&
-    board[4] !== '' &&
-    board[6] !== '' &&
     board[2] === board[4] &&
     board[4] === board[6]
   const tie =
@@ -108,7 +106,6 @@ const onWin = function () {
   } else {
     endGame = false
   }
-  // return endGame
 }
 
 const onNewGame = function () {
@@ -125,7 +122,7 @@ const onPlayerOne = function (event) {
   const target = event.target
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
   if (endGame) { // if endGame is true then this will break us out of onPlayerOne and keep the player from continuing to click
-    $('#message').text(`${winner} wins!`)
+    // $('#message').text(`${winner} wins!`) find a way to update who is the winner, now newgame sets player -> x winner -> player so it is always x
     return
   }
   if ($(target).is(':empty')) { // setting an if statement to only run this process if a cell is empty
@@ -147,7 +144,6 @@ const onPlayerOne = function (event) {
     turn = !turn // this changes turn from true to false each return
     player = turn ? 'x' : 'o' // redefining player turn so that our message is properly displaying whose turn it is
     $('#message').text(`It's ${player}'s turn!`)
-    // return turn
   } else { // message for when a cell is full
     $('#message').text('This space is taken! Why don\'t you select an empty one?')
   }
