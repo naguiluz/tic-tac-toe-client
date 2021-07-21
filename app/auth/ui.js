@@ -1,6 +1,5 @@
 const store = require('./../store')
 // const player = require('./events')
-
 const onSignUpSuccess = function (response) { // this gives our user a success message
   $('#message').text(`Thanks for signing up, ${response.user.email}!`)
   $('#sign-up-header').css('display', 'none')
@@ -40,20 +39,14 @@ const onSignOutSuccess = function () {
 const onNewGameSuccess = function (response) {
   store.game = response.game // this stores game object to be accessed later
   store.gameId = response.game._id // this stores data for gameid in store
-  $('#message').text("Let's Play!")
+  $('#message').text('It\'s x\'s turn!')
   $('#game-board').css('display', 'block')
 }
 
 const onPlayerOneSuccess = function (response) {
-  store.game.cells = response.game.cells
-  // const boardArray = store.game.cells
-  // console.log(boardArray)
+  store.game = response.game
+  console.log(store.game)
 }
-
-// const onWinSuccess = function (response) {
-//   console.log(response)
-// }
-
 const onFailure = function () { // this gives our user a fail message
   $('#message').text('Whoops! There was an error!')
 }
@@ -64,6 +57,5 @@ module.exports = {
   onSignOutSuccess,
   onNewGameSuccess,
   onPlayerOneSuccess,
-  // onWinSuccess,
   onFailure
 }

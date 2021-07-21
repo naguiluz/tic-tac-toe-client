@@ -5,6 +5,7 @@ const store = require('./../store')
 let turn = true // this will allow us to access what turn it is. if turn is true then x if false then o
 let player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
 let endGame = false
+const winner = player
 
 const onSignUp = function (event) {
   event.preventDefault() // prevent refresh
@@ -30,59 +31,34 @@ const onSignOut = function () { // our sign out event does not take in any data 
     .catch(ui.onFailure)
 }
 
-const onNewGame = function () {
-  player = 'x' // reset turn to x
-  turn = true // reset turn to true
-  endGame = false
-  $('td').text('') // resets the boxes for a new game
-  api.newGame()
-    .then(ui.onNewGameSuccess)
-    .catch(ui.onFailure)
-}
-
 const onWin = function () {
   const board = store.game.cells
-  console.log(store.game)
   const win1 =
     board[0] !== '' &&
-    board[1] !== '' &&
-    board[2] !== '' &&
     board[0] === board[1] &&
     board[1] === board[2]
   const win2 =
     board[3] !== '' &&
-    board[4] !== '' &&
-    board[5] !== '' &&
     board[3] === board[4] &&
     board[4] === board[5]
   const win3 =
     board[6] !== '' &&
-    board[7] !== '' &&
-    board[8] !== '' &&
     board[6] === board[7] &&
     board[7] === board[8]
   const win4 =
     board[0] !== '' &&
-    board[3] !== '' &&
-    board[6] !== '' &&
     board[0] === board[3] &&
     board[3] === board[6]
   const win5 =
     board[1] !== '' &&
-    board[4] !== '' &&
-    board[7] !== '' &&
     board[1] === board[4] &&
     board[4] === board[7]
   const win6 =
     board[2] !== '' &&
-    board[5] !== '' &&
-    board[8] !== '' &&
     board[2] === board[5] &&
     board[5] === board[8]
   const win7 =
     board[0] !== '' &&
-    board[4] !== '' &&
-    board[8] !== '' &&
     board[0] === board[4] &&
     board[4] === board[8]
   const win8 =
@@ -102,36 +78,47 @@ const onWin = function () {
     board[7] !== '' &&
     board[8] !== ''
 
-  if (board === win1) {
+  if (win1) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win2) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win2) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win3) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win3) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win4) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win4) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win5) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win5) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win6) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win6) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win7) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win7) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === win8) {
+    $('#message').text(`${winner} wins!`)
+  } else if (win8) {
     endGame = true
-    $('#message').text(`${player} wins!`)
-  } else if (board === tie) {
+    $('#message').text(`${winner} wins!`)
+  } else if (tie) {
     endGame = true
-    $('#message').text('It\'s a tie!')
+    $('#message').text("It's a tie!")
   } else {
     endGame = false
   }
+  // return endGame
+}
+
+const onNewGame = function () {
+  player = 'x' // reset turn to x
+  turn = true // reset turn to true
+  endGame = false
+  $('td').text('') // resets the boxes for a new game
+  api.newGame()
+    .then(ui.onNewGameSuccess)
+    .catch(ui.onFailure)
 }
 
 const onPlayerOne = function (event) {
@@ -139,15 +126,17 @@ const onPlayerOne = function (event) {
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
   if ($(target).is(':empty')) { // setting an if statement to only run this process if a cell is empty
     $(target).text(player)
-
-    const game = { // this creates a variable that is a game "object" that we can pass in
+    store.game.cells[cellIndex] = player
+    onWin()
+    const game = {
+      // this creates a variable that is a game "object" that we can pass in
       cell: {
         index: cellIndex, // sets index to clicked td
         value: player // this sets the value to what player turn it is
       },
       over: endGame // NEED TO UPDATE THIS LATER
     }
-    onWin()
+    // onWin(event)
     api.playerOne(game)
       .then(ui.onPlayerOneSuccess)
       .catch(ui.onFailure)
