@@ -45,10 +45,14 @@ const onNewGameSuccess = function (response) {
 }
 
 const onPlayerOneSuccess = function (response) {
-  console.log(response)
   store.game.cells = response.game.cells
-  console.log(store.game.cells)
+  // const boardArray = store.game.cells
+  // console.log(boardArray)
 }
+
+// const onWinSuccess = function (response) {
+//   console.log(response)
+// }
 
 const onFailure = function () { // this gives our user a fail message
   $('#message').text('Whoops! There was an error!')
@@ -60,5 +64,6 @@ module.exports = {
   onSignOutSuccess,
   onNewGameSuccess,
   onPlayerOneSuccess,
+  // onWinSuccess,
   onFailure
 }
