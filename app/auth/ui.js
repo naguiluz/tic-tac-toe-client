@@ -46,6 +46,9 @@ const onNewGameSuccess = function (response) {
 const onPlayerOneSuccess = function (response) {
   store.game = response.game
   console.log(store.game)
+  if (response.game.over) { // if over is true then display this message
+    $('#message').text('Game Over!')
+  }
 }
 const onFailure = function () { // this gives our user a fail message
   $('#message').text('Whoops! There was an error!')

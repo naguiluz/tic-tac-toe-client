@@ -124,9 +124,13 @@ const onNewGame = function () {
 const onPlayerOne = function (event) {
   const target = event.target
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
+  if (endGame) { // if endGame is true then this will break us out of onPlayerOne and keep the player from continuing to click
+    $('#message').text(`${winner} wins!`)
+    return
+  }
   if ($(target).is(':empty')) { // setting an if statement to only run this process if a cell is empty
     $(target).text(player)
-    store.game.cells[cellIndex] = player
+    store.game.cells[cellIndex] = player // this updates the store.game.cells[cellIndex] = player by updating it on our end first before making the call to update it on their end
     onWin()
     const game = {
       // this creates a variable that is a game "object" that we can pass in
