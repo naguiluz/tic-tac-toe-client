@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Example</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <h1>Let's Play Tic-Tac-Toe</h1>
+      <p id="message"></p>
+      <h2 id="sign-up-header" display="block">Sign Up!</h2>
+      <form id="sign-up" display="block">
+        <label for="sign-up-email">Email:</label>
+        <input name="credentials[email]" id="sign-up-email" type="email">
+        <label for="sign-up-password">Password:</label>
+        <input name="credentials[password]" id="sign-up-password" type="password">
+        <label for="sign-up-password-confirmation">Password Confirmation:</label>
+        <input name="credentials[password_confirmation]" id="sign-up-password-confirmation" type="password">
+        <input type="submit" value="Sign Up">
+      </form>
+      <h2 id="sign-in-header" display="block">Sign In!</h2>
+      <form id="sign-in" display="block">
+        <label for="sign-in-email">Email:</label>
+        <input name="credentials[email]" id="sign-in-email" type="email">
+        <label for="sign-in-password">Password:</label>
+        <input name="credentials[password]" id="sign-in-password" type="password">
+        <input type="submit" value="Sign In">
+      </form>
+      <h2 id="sign-out-header" style="display:none">Sign Out!</h2>
+        <button id="sign-out" type="button" style="display:none">Sign out</button>
+      <h2 id="new-game-header" style="display:none">New Game!</h2>
+      <button id="new-game" type="button" style="display:none">New Game</button>
+      <table class="center" id="game-board" style="display:none"> <!--design inspired by https://codepen.io/xunnn/pen/yEmMbm-->
+        <tr>
+          <td data-cell-index="0"></td>
+          <td class="vertical" data-cell-index="1"></td>
+          <td data-cell-index="2"></td>
+        </tr>
+        <tr>
+          <td class="horizontal" data-cell-index="3"></td>
+          <td class="vertical horizontal" data-cell-index="4"></td>
+          <td class="horizontal" data-cell-index="5"></td>
+        </tr>
+        <tr>
+          <td data-cell-index="6"></td>
+          <td class="vertical" data-cell-index="7"></td>
+          <td data-cell-index="8"></td>
+        </tr>
+      </table>
+    </body>
+</html>

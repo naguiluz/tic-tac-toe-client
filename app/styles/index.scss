@@ -1,0 +1,52 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
+td {
+  height: 250px;
+  width: 250px;
+  text-align: center;
+}
+
+.vertical {
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+}
+
+.horizontal {
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+
+}
+#message {
+  font-family: 'Amatic SC', cursive;
+}
+
+body {
+  text-align: center;
+  background: #f0f0e4;
+  font-size: 50px;
+}
+h1 {
+  color: #db5f29;
+  font-family: 'Amatic SC', cursive;
+  font-size: 75px;
+}
+h2 {
+  color: #68bde1;
+  font-family: 'Amatic SC', cursive;
+  font-size: 65px;
+}
+
+form {
+  color: #7b3c3c;
+  font-family: 'Amatic SC', cursive;
+
+}
+
+button {
+  font-family: 'Amatic SC', cursive;
+  margin: auto;
+}
+.center {
+  margin: auto;
+}
