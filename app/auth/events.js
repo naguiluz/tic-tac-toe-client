@@ -6,6 +6,7 @@ let turn = true // this will allow us to access what turn it is. if turn is true
 let player = turn ? 'x' : 'o' // this turnery says "is turn true? if yes then x if false then o"
 let endGame = false
 const winner = player
+let tieGame = false
 
 const onSignUp = function (event) {
   event.preventDefault() // prevent refresh
@@ -78,31 +79,23 @@ const onWin = function () {
 
   if (win1) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win2) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win3) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win4) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win5) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win6) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win7) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (win8) {
     endGame = true
-    $('#message').text(`${winner} wins!`)
   } else if (tie) {
     endGame = true
-    $('#message').text("It's a tie!")
+    tieGame = true
   } else {
     endGame = false
   }
@@ -122,7 +115,6 @@ const onPlayerOne = function (event) {
   const target = event.target
   const cellIndex = target.dataset.cellIndex // this creates a variable out of the clicked(target) cell index
   if (endGame) { // if endGame is true then this will break us out of onPlayerOne and keep the player from continuing to click
-    // $('#message').text(`${winner} wins!`) find a way to update who is the winner, now newgame sets player -> x winner -> player so it is always x
     return
   }
   if ($(target).is(':empty')) { // setting an if statement to only run this process if a cell is empty
@@ -137,10 +129,18 @@ const onPlayerOne = function (event) {
       },
       over: endGame // NEED TO UPDATE THIS LATER
     }
-    // onWin(event)
+    if (endGame && tieGame === true) {
+      $('#message').text("Game Over! It's a tie!")
+      return
+    } else if (endGame) {
+      $('#message').text(`Game Over! ${player} wins!`)
+      return
+    }
+
     api.playerOne(game)
       .then(ui.onPlayerOneSuccess)
       .catch(ui.onFailure)
+
     turn = !turn // this changes turn from true to false each return
     player = turn ? 'x' : 'o' // redefining player turn so that our message is properly displaying whose turn it is
     $('#message').text(`It's ${player}'s turn!`)
